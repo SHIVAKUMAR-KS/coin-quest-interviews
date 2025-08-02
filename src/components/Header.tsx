@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Coins, Menu, X, Brain } from "lucide-react";
@@ -12,14 +13,22 @@ interface HeaderProps {
 const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [coinBalance, setCoinBalance] = useState(200);
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     setIsLoggedIn(true);
     setMobileMenuOpen(false);
+    navigate('/dashboard');
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    setMobileMenuOpen(false);
+    navigate('/');
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setMobileMenuOpen(false);
   };
 
@@ -28,7 +37,10 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2 group cursor-pointer">
+          <div 
+            className="flex items-center space-x-2 group cursor-pointer"
+            onClick={() => handleNavigation('/')}
+          >
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
               <Brain className="w-6 h-6 text-white" />
             </div>
@@ -39,11 +51,31 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#home" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Home</a>
-            <a href="#blog" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Blog</a>
-            <a href="#demo" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Book a Demo</a>
+            <button 
+              onClick={() => handleNavigation('/')}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => handleNavigation('/blog')}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
+              Blog
+            </button>
+            <button 
+              onClick={() => handleNavigation('/book-demo')}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
+              Book a Demo
+            </button>
             {isLoggedIn && (
-              <a href="#dashboard" className="text-gray-700 hover:text-blue-600 transition-colors duration-200">Dashboard</a>
+              <button 
+                onClick={() => handleNavigation('/dashboard')}
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              >
+                Dashboard
+              </button>
             )}
           </nav>
 
@@ -86,12 +118,32 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-md animate-fade-in">
             <div className="flex flex-col space-y-2">
-              <a href="#home" className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">Home</a>
-              <a href="#blog" className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">Blog</a>
-              <a href="#demo" className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">Book a Demo</a>
+              <button 
+                onClick={() => handleNavigation('/')}
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+              >
+                Home
+              </button>
+              <button 
+                onClick={() => handleNavigation('/blog')}
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+              >
+                Blog
+              </button>
+              <button 
+                onClick={() => handleNavigation('/book-demo')}
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+              >
+                Book a Demo
+              </button>
               {isLoggedIn && (
                 <>
-                  <a href="#dashboard" className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200">Dashboard</a>
+                  <button 
+                    onClick={() => handleNavigation('/dashboard')}
+                    className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                  >
+                    Dashboard
+                  </button>
                   <div className="px-4 py-2">
                     <Badge variant="secondary" className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 border-amber-200">
                       <Coins className="w-4 h-4 mr-1" />
