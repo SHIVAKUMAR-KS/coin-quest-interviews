@@ -1,379 +1,325 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Upload, Play, Check, AlertCircle, Download, Eye } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Upload, FileText, MessageSquare, Star, Clock, Target, ChevronRight, Zap } from "lucide-react";
 
 const JDResumeInterview = () => {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [jdFile, setJDFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
+  const [jdFile, setJdFile] = useState<File | null>(null);
+  const [jdText, setJdText] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
   const [analysisComplete, setAnalysisComplete] = useState(false);
-  const [interviewReady, setInterviewReady] = useState(false);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, type: 'resume' | 'jd') => {
+  const roles = [
+    "Software Engineer", "Product Manager", "Data Scientist", 
+    "UX Designer", "Marketing Manager", "Sales Executive"
+  ];
+  
+  const levels = ["Entry Level", "Mid Level", "Senior Level", "Lead/Principal"];
+
+  const handleResumeUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (type === 'resume') {
-        setResumeFile(file);
-      } else {
-        setJDFile(file);
-      }
-      
-      setIsUploading(true);
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 15;
-        setUploadProgress(progress);
-        if (progress >= 100) {
-          clearInterval(interval);
-          setIsUploading(false);
-          setUploadProgress(0);
-          
-          // Simulate analysis completion after upload
-          setTimeout(() => {
-            setAnalysisComplete(true);
-            setInterviewReady(resumeFile && jdFile);
-          }, 1000);
-        }
-      }, 200);
+      setResumeFile(file);
     }
   };
 
-  const uploadedDocuments = [
-    {
-      id: 1,
-      name: "Software_Engineer_Resume.pdf",
-      type: "Resume",
-      uploadDate: "2024-01-15",
-      status: "analyzed",
-      matchScore: 87
-    },
-    {
-      id: 2,
-      name: "Senior_Developer_JD.pdf",
-      type: "Job Description",
-      uploadDate: "2024-01-15",
-      status: "analyzed",
-      relevanceScore: 92
-    },
-    {
-      id: 3,
-      name: "Product_Manager_Resume.pdf",
-      type: "Resume",
-      uploadDate: "2024-01-12",
-      status: "processed",
-      matchScore: 78
+  const handleJDUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setJdFile(file);
     }
-  ];
+  };
 
-  const interviewHistory = [
-    {
-      id: 1,
-      resumeFile: "Software_Engineer_Resume.pdf",
-      jdFile: "Senior_Developer_JD.pdf",
-      score: 89,
-      duration: "42 min",
-      date: "2024-01-15",
-      matchPercentage: 87,
-      keyStrengths: ["React", "Node.js", "Problem Solving"],
-      improvements: ["System Design", "Leadership"]
-    },
-    {
-      id: 2,
-      resumeFile: "Product_Manager_Resume.pdf",
-      jdFile: "PM_Job_Description.pdf",
-      score: 76,
-      duration: "38 min",
-      date: "2024-01-12",
-      matchPercentage: 78,
-      keyStrengths: ["Strategy", "Analytics", "Communication"],
-      improvements: ["Technical Knowledge", "Stakeholder Management"]
+  const handleStartAnalysis = () => {
+    if ((resumeFile && jdFile) || (resumeFile && jdText)) {
+      setAnalysisComplete(true);
     }
-  ];
+  };
+
+  const mockAnalysis = {
+    matchScore: 87,
+    strengths: [
+      "Strong technical background matches JD requirements",
+      "Relevant experience in similar roles",
+      "Educational background aligns well"
+    ],
+    gaps: [
+      "Missing experience with specific cloud platforms",
+      "Could benefit from more leadership experience"
+    ],
+    recommendations: [
+      "Highlight your problem-solving abilities",
+      "Prepare examples of teamwork and collaboration",
+      "Practice explaining technical concepts simply"
+    ]
+  };
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-white mb-2">JD/Resume Interview</h1>
-        <p className="text-cyan-200">Upload your resume and job description for personalized AI-powered interview practice</p>
+    <div className="space-y-4 sm:space-y-6 lg:space-y-8">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full animate-pulse"></div>
+        <div className="absolute top-1/3 -left-20 w-60 h-60 bg-purple-500/10 rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 right-1/4 w-40 h-40 bg-cyan-500/10 rounded-full animate-pulse delay-500"></div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Upload Section */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Upload Section */}
-          <Card className="bg-white/10 border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center space-x-2">
-                <Upload className="w-6 h-6" />
-                <span>Document Upload</span>
+      {/* Header */}
+      <div className="relative z-10">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 animate-fade-in">JD/Resume Interview</h1>
+        <p className="text-cyan-200 text-sm sm:text-base animate-fade-in">Upload your resume and job description for personalized interview preparation</p>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 relative z-10">
+        {/* Upload Section */}
+        <div className="xl:col-span-2 space-y-4 sm:space-y-6">
+          {/* Resume Upload */}
+          <Card className="bg-white/10 border-white/20 hover-scale animate-fade-in">
+            <CardHeader className="pb-3 sm:pb-4">
+              <CardTitle className="text-white flex items-center space-x-2 text-lg sm:text-xl">
+                <Upload className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span>Upload Resume</span>
               </CardTitle>
-              <CardDescription className="text-gray-300">
-                Upload your resume and target job description for AI analysis and personalized interview questions
+              <CardDescription className="text-gray-300 text-sm">
+                Upload your resume in PDF, DOC, or DOCX format
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Resume Upload */}
-                <div className="space-y-4">
-                  <label className="block text-sm font-medium text-white">Upload Resume</label>
-                  <div className="border-2 border-dashed border-gray-400/50 rounded-lg p-6 text-center hover:border-blue-400/70 transition-colors cursor-pointer bg-white/5">
-                    <input
-                      type="file"
-                      accept=".pdf,.docx,.doc"
-                      onChange={(e) => handleFileUpload(e, 'resume')}
-                      className="hidden"
-                      id="resume-upload"
-                    />
-                    <label htmlFor="resume-upload" className="cursor-pointer">
-                      {resumeFile ? (
-                        <div className="space-y-2">
-                          <Check className="w-8 h-8 text-green-400 mx-auto" />
-                          <p className="text-sm text-green-400 font-medium">{resumeFile.name}</p>
-                          <p className="text-xs text-gray-400">Successfully uploaded</p>
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          <FileText className="w-8 h-8 text-gray-400 mx-auto" />
-                          <p className="text-sm text-white">Click to upload Resume</p>
-                          <p className="text-xs text-gray-400">PDF, DOCX up to 10MB</p>
-                        </div>
-                      )}
-                    </label>
-                  </div>
+            <CardContent className="space-y-4">
+              <div className="border-2 border-dashed border-white/30 rounded-lg p-4 sm:p-8 text-center hover:border-white/50 transition-colors">
+                <input
+                  type="file"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleResumeUpload}
+                  className="hidden"
+                  id="resume-upload"
+                />
+                <label htmlFor="resume-upload" className="cursor-pointer">
+                  <FileText className="w-8 h-8 sm:w-12 sm:h-12 text-cyan-400 mx-auto mb-4" />
+                  <p className="text-white mb-2 text-sm sm:text-base">
+                    {resumeFile ? resumeFile.name : "Click to upload or drag and drop"}
+                  </p>
+                  <p className="text-gray-400 text-xs sm:text-sm">PDF, DOC, DOCX up to 10MB</p>
+                </label>
+              </div>
+              {resumeFile && (
+                <div className="flex items-center space-x-2 text-green-400 text-sm animate-fade-in">
+                  <FileText className="w-4 h-4" />
+                  <span>Resume uploaded successfully</span>
                 </div>
-                
-                {/* JD Upload */}
-                <div className="space-y-4">
-                  <label className="block text-sm font-medium text-white">Upload Job Description</label>
-                  <div className="border-2 border-dashed border-gray-400/50 rounded-lg p-6 text-center hover:border-blue-400/70 transition-colors cursor-pointer bg-white/5">
-                    <input
-                      type="file"
-                      accept=".pdf,.docx,.doc,.txt"
-                      onChange={(e) => handleFileUpload(e, 'jd')}
-                      className="hidden"
-                      id="jd-upload"
-                    />
-                    <label htmlFor="jd-upload" className="cursor-pointer">
-                      {jdFile ? (
-                        <div className="space-y-2">
-                          <Check className="w-8 h-8 text-green-400 mx-auto" />
-                          <p className="text-sm text-green-400 font-medium">{jdFile.name}</p>
-                          <p className="text-xs text-gray-400">Successfully uploaded</p>
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          <FileText className="w-8 h-8 text-gray-400 mx-auto" />
-                          <p className="text-sm text-white">Click to upload Job Description</p>
-                          <p className="text-xs text-gray-400">PDF, DOCX, TXT up to 10MB</p>
-                        </div>
-                      )}
-                    </label>
-                  </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Job Description */}
+          <Card className="bg-white/10 border-white/20 hover-scale animate-fade-in">
+            <CardHeader className="pb-3 sm:pb-4">
+              <CardTitle className="text-white flex items-center space-x-2 text-lg sm:text-xl">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span>Job Description</span>
+              </CardTitle>
+              <CardDescription className="text-gray-300 text-sm">
+                Upload JD file or paste the job description text
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="border-2 border-dashed border-white/30 rounded-lg p-4 sm:p-6 text-center hover:border-white/50 transition-colors">
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.txt"
+                    onChange={handleJDUpload}
+                    className="hidden"
+                    id="jd-upload"
+                  />
+                  <label htmlFor="jd-upload" className="cursor-pointer">
+                    <Upload className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-400 mx-auto mb-2" />
+                    <p className="text-white text-xs sm:text-sm">
+                      {jdFile ? jdFile.name : "Upload JD File"}
+                    </p>
+                  </label>
+                </div>
+                <div className="text-center flex items-center justify-center text-gray-400 text-sm">
+                  OR
                 </div>
               </div>
+              <Textarea
+                placeholder="Paste job description here..."
+                className="bg-white/10 border-white/20 text-white placeholder:text-gray-400 min-h-[120px] text-sm"
+                value={jdText}
+                onChange={(e) => setJdText(e.target.value)}
+              />
+            </CardContent>
+          </Card>
+
+          {/* Interview Configuration */}
+          <Card className="bg-white/10 border-white/20 hover-scale animate-fade-in">
+            <CardHeader className="pb-3 sm:pb-4">
+              <CardTitle className="text-white text-lg sm:text-xl">Interview Settings</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Select value={selectedRole} onValueChange={setSelectedRole}>
+                  <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                    <SelectValue placeholder="Select Role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roles.map((role) => (
+                      <SelectItem key={role} value={role}>{role}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                  <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                    <SelectValue placeholder="Experience Level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {levels.map((level) => (
+                      <SelectItem key={level} value={level}>{level}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               
-              {/* Upload Progress */}
-              {isUploading && (
-                <div className="mt-6 p-4 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <Upload className="w-5 h-5 text-blue-400" />
-                    <span className="text-white font-medium">Uploading and analyzing documents...</span>
-                  </div>
-                  <Progress value={uploadProgress} className="w-full" />
-                  <p className="text-sm text-blue-300 mt-2">Processing... {uploadProgress}%</p>
-                </div>
-              )}
-
-              {/* Analysis Complete */}
-              {analysisComplete && (resumeFile || jdFile) && (
-                <div className="mt-6 p-4 bg-green-500/10 rounded-lg border border-green-500/20">
-                  <div className="flex items-center space-x-3 mb-2">
-                    <Check className="w-5 h-5 text-green-400" />
-                    <span className="text-white font-medium">Documents analyzed successfully!</span>
-                  </div>
-                  <p className="text-sm text-green-300">AI has analyzed your documents and created personalized interview questions.</p>
-                </div>
-              )}
-
-              {/* Start Interview Button */}
               <Button 
-                className="w-full mt-6 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-6 text-lg font-semibold"
-                disabled={!resumeFile || !jdFile || !analysisComplete}
+                onClick={handleStartAnalysis}
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-4 sm:py-6 text-base sm:text-lg font-semibold hover-scale"
+                disabled={!resumeFile || (!jdFile && !jdText) || !selectedRole || !selectedLevel}
               >
-                <Play className="w-5 h-5 mr-2" />
-                Start Personalized Interview (12 Coins)
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                Start Analysis & Interview (25 Coins)
               </Button>
             </CardContent>
           </Card>
 
-          {/* Interview History */}
-          <Card className="bg-white/10 border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white">Interview History</CardTitle>
-              <CardDescription className="text-gray-300">
-                Previous JD/Resume based interviews and their results
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {interviewHistory.map((interview) => (
-                  <div key={interview.id} className="p-4 bg-white/5 rounded-lg border border-white/10">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="space-y-1">
-                        <div className="flex items-center space-x-2">
-                          <Badge variant="outline" className="text-blue-400 border-blue-400">
-                            Match: {interview.matchPercentage}%
-                          </Badge>
-                          <Badge variant="secondary">Score: {interview.score}%</Badge>
-                        </div>
-                        <div className="text-sm text-gray-400">
-                          {interview.resumeFile} × {interview.jdFile}
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-lg font-bold text-white">{interview.score}%</div>
-                        <div className="text-xs text-gray-400">{interview.duration}</div>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-                      <div>
-                        <div className="text-xs font-medium text-green-400 mb-1">Key Strengths</div>
-                        <div className="flex flex-wrap gap-1">
-                          {interview.keyStrengths.map((strength, idx) => (
-                            <Badge key={idx} variant="outline" className="text-xs text-green-400 border-green-400/50">
-                              {strength}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-xs font-medium text-yellow-400 mb-1">Areas to Improve</div>
-                        <div className="flex flex-wrap gap-1">
-                          {interview.improvements.map((improvement, idx) => (
-                            <Badge key={idx} variant="outline" className="text-xs text-yellow-400 border-yellow-400/50">
-                              {improvement}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-gray-400">{interview.date}</span>
-                      <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300">
-                        <Eye className="w-4 h-4 mr-1" />
-                        View Report
-                      </Button>
-                    </div>
+          {/* Analysis Results */}
+          {analysisComplete && (
+            <Card className="bg-white/10 border-white/20 animate-fade-in">
+              <CardHeader className="pb-3 sm:pb-4">
+                <CardTitle className="text-white flex items-center justify-between text-lg sm:text-xl">
+                  <span>Analysis Results</span>
+                  <Badge className="bg-green-500 text-white text-lg sm:text-xl px-3 py-1">
+                    {mockAnalysis.matchScore}%
+                  </Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                  <div>
+                    <h4 className="font-semibold text-green-400 mb-3 text-sm sm:text-base">Strengths</h4>
+                    <ul className="space-y-2">
+                      {mockAnalysis.strengths.map((strength, index) => (
+                        <li key={index} className="text-gray-300 text-xs sm:text-sm flex items-start">
+                          <Star className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 mr-2 mt-0.5 flex-shrink-0" />
+                          {strength}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  
+                  <div>
+                    <h4 className="font-semibold text-yellow-400 mb-3 text-sm sm:text-base">Areas to Address</h4>
+                    <ul className="space-y-2">
+                      {mockAnalysis.gaps.map((gap, index) => (
+                        <li key={index} className="text-gray-300 text-xs sm:text-sm flex items-start">
+                          <Target className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mr-2 mt-0.5 flex-shrink-0" />
+                          {gap}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-semibold text-blue-400 mb-3 text-sm sm:text-base">Interview Recommendations</h4>
+                  <ul className="space-y-2">
+                    {mockAnalysis.recommendations.map((rec, index) => (
+                      <li key={index} className="text-gray-300 text-xs sm:text-sm flex items-start">
+                        <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400 mr-2 mt-0.5 flex-shrink-0" />
+                        {rec}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white py-4 sm:py-6 text-base sm:text-lg font-semibold hover-scale">
+                  <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  Start Personalized Interview
+                </Button>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         {/* Sidebar */}
-        <div className="space-y-6">
-          {/* Document Library */}
-          <Card className="bg-white/10 border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center space-x-2">
-                <FileText className="w-5 h-5" />
-                <span>Document Library</span>
+        <div className="space-y-4 sm:space-y-6">
+          {/* Quick Stats */}
+          <Card className="bg-white/10 border-white/20 animate-fade-in">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-white text-base sm:text-lg">Quick Stats</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-300 text-sm">JD Analyses</span>
+                <span className="font-bold text-white">12</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-300 text-sm">Avg Match Score</span>
+                <span className="font-bold text-green-400">84%</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-300 text-sm">Interviews Done</span>
+                <span className="font-bold text-blue-400">8</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent Analysis */}
+          <Card className="bg-white/10 border-white/20 animate-fade-in">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-white flex items-center space-x-2 text-base sm:text-lg">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Recent Analysis</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {uploadedDocuments.map((doc) => (
-                <div key={doc.id} className="p-3 bg-white/5 rounded-lg">
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-white truncate">{doc.name}</div>
-                      <div className="text-xs text-gray-400">{doc.type}</div>
-                    </div>
-                    <Badge 
-                      variant={doc.status === 'analyzed' ? 'default' : 'secondary'}
-                      className="text-xs"
-                    >
-                      {doc.status}
-                    </Badge>
+              {[
+                { role: "Frontend Developer", score: 91, date: "2024-01-15" },
+                { role: "Product Manager", score: 78, date: "2024-01-10" },
+                { role: "UX Designer", score: 85, date: "2024-01-08" }
+              ].map((item, index) => (
+                <div key={index} className="p-3 bg-white/5 rounded-lg">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="font-medium text-white text-sm">{item.role}</span>
+                    <Badge variant="secondary" className="text-xs">{item.score}%</Badge>
                   </div>
-                  {doc.matchScore && (
-                    <div className="text-xs text-green-400 mb-1">
-                      Match Score: {doc.matchScore}%
-                    </div>
-                  )}
-                  {doc.relevanceScore && (
-                    <div className="text-xs text-blue-400 mb-1">
-                      Relevance: {doc.relevanceScore}%
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">{doc.uploadDate}</span>
-                    <Button variant="ghost" size="sm" className="text-xs p-1 h-6">
-                      <Download className="w-3 h-3" />
-                    </Button>
-                  </div>
+                  <span className="text-xs text-gray-400">{item.date}</span>
                 </div>
               ))}
             </CardContent>
           </Card>
 
           {/* Tips */}
-          <Card className="bg-white/10 border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center space-x-2">
-                <AlertCircle className="w-5 h-5" />
-                <span>Upload Tips</span>
-              </CardTitle>
+          <Card className="bg-white/10 border-white/20 animate-fade-in">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-white text-base sm:text-lg">Interview Tips</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm text-gray-300">
+            <CardContent className="space-y-2 text-xs sm:text-sm text-gray-300">
               <div className="flex items-start space-x-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                <span>Upload complete, updated resumes for best results</span>
-              </div>
-              <div className="flex items-start space-x-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                <span>Use detailed job descriptions with requirements</span>
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                <span>Tailor your responses to match the JD keywords</span>
               </div>
               <div className="flex items-start space-x-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                <span>Supported formats: PDF, DOCX, DOC, TXT</span>
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                <span>Use STAR method for behavioral questions</span>
               </div>
               <div className="flex items-start space-x-2">
-                <div className="w-2 h-2 bg-cyan-400 rounded-full mt-1.5 flex-shrink-0"></div>
-                <span>Maximum file size: 10MB per document</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Stats */}
-          <Card className="bg-white/10 border-white/20">
-            <CardHeader>
-              <CardTitle className="text-white">JD/Resume Stats</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Documents Uploaded</span>
-                <span className="font-bold text-white">12</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Avg Match Score</span>
-                <span className="font-bold text-green-400">84%</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Interviews Completed</span>
-                <span className="font-bold text-blue-400">8</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-300">Best Score</span>
-                <span className="font-bold text-purple-400">94%</span>
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                <span>Prepare questions about the role and company</span>
               </div>
             </CardContent>
           </Card>

@@ -35,56 +35,56 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <div 
             className="flex items-center space-x-2 group cursor-pointer"
             onClick={() => handleNavigation('/')}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
-              <Brain className="w-6 h-6 text-white" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
+              <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hidden sm:inline">
               CoinQuest Interviews
             </span>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             <button 
               onClick={() => handleNavigation('/')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
             >
               Home
             </button>
             <button 
               onClick={() => handleNavigation('/blog')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
             >
               Blog
             </button>
             <button 
               onClick={() => handleNavigation('/book-demo')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
             >
               Book a Demo
             </button>
             <button 
               onClick={() => handleNavigation('/watch-demo')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
             >
               Watch Demo
             </button>
             <button 
               onClick={() => handleNavigation('/contact-support')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
             >
               Contact Support
             </button>
             {isLoggedIn && (
               <button 
                 onClick={() => handleNavigation('/dashboard')}
-                className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
               >
                 Dashboard
               </button>
@@ -92,17 +92,18 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
           </nav>
 
           {/* User Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
             {isLoggedIn ? (
               <>
-                <Badge variant="secondary" className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 border-amber-200">
-                  <Coins className="w-4 h-4 mr-1" />
+                <Badge variant="secondary" className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 border-amber-200 text-xs sm:text-sm">
+                  <Coins className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                   {coinBalance} Coins
                 </Badge>
                 <Button 
                   variant="outline" 
                   onClick={handleLogout}
-                  className="hover:bg-red-50 hover:border-red-300 hover:text-red-700 transition-all duration-200"
+                  className="hover:bg-red-50 hover:border-red-300 hover:text-red-700 transition-all duration-200 text-xs sm:text-sm px-3 sm:px-4"
+                  size="sm"
                 >
                   Logout
                 </Button>
@@ -110,7 +111,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
             ) : (
               <Button 
                 onClick={handleLogin}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform hover:scale-105 transition-all duration-200 text-xs sm:text-sm px-3 sm:px-4"
+                size="sm"
               >
                 Sign In
               </Button>
@@ -120,43 +122,43 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-md animate-fade-in">
+          <div className="lg:hidden py-4 border-t border-gray-200 bg-white/95 backdrop-blur-md animate-fade-in">
             <div className="flex flex-col space-y-2">
               <button 
                 onClick={() => handleNavigation('/')}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
               >
                 Home
               </button>
               <button 
                 onClick={() => handleNavigation('/blog')}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
               >
                 Blog
               </button>
               <button 
                 onClick={() => handleNavigation('/book-demo')}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
               >
                 Book a Demo
               </button>
               <button 
                 onClick={() => handleNavigation('/watch-demo')}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
               >
                 Watch Demo
               </button>
               <button 
                 onClick={() => handleNavigation('/contact-support')}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
               >
                 Contact Support
               </button>
@@ -164,30 +166,34 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
                 <>
                   <button 
                     onClick={() => handleNavigation('/dashboard')}
-                    className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+                    className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
                   >
                     Dashboard
                   </button>
                   <div className="px-4 py-2">
-                    <Badge variant="secondary" className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 border-amber-200">
+                    <Badge variant="secondary" className="bg-gradient-to-r from-yellow-100 to-amber-100 text-amber-800 border-amber-200 text-sm">
                       <Coins className="w-4 h-4 mr-1" />
                       {coinBalance} Coins
                     </Badge>
                   </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={handleLogout}
-                    className="mx-4 hover:bg-red-50 hover:border-red-300 hover:text-red-700"
-                  >
-                    Logout
-                  </Button>
+                  <div className="px-4 py-2">
+                    <Button 
+                      variant="outline" 
+                      onClick={handleLogout}
+                      className="w-full hover:bg-red-50 hover:border-red-300 hover:text-red-700 text-sm"
+                      size="sm"
+                    >
+                      Logout
+                    </Button>
+                  </div>
                 </>
               )}
               {!isLoggedIn && (
                 <div className="px-4 py-2">
                   <Button 
                     onClick={handleLogin}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-sm"
+                    size="sm"
                   >
                     Sign In
                   </Button>
