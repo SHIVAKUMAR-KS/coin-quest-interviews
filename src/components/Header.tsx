@@ -69,6 +69,18 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
             >
               Book a Demo
             </button>
+            <button 
+              onClick={() => handleNavigation('/watch-demo')}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
+              Watch Demo
+            </button>
+            <button 
+              onClick={() => handleNavigation('/contact-support')}
+              className="text-gray-700 hover:text-blue-600 transition-colors duration-200"
+            >
+              Contact Support
+            </button>
             {isLoggedIn && (
               <button 
                 onClick={() => handleNavigation('/dashboard')}
@@ -135,6 +147,18 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
                 className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
               >
                 Book a Demo
+              </button>
+              <button 
+                onClick={() => handleNavigation('/watch-demo')}
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+              >
+                Watch Demo
+              </button>
+              <button 
+                onClick={() => handleNavigation('/contact-support')}
+                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left"
+              >
+                Contact Support
               </button>
               {isLoggedIn && (
                 <>
