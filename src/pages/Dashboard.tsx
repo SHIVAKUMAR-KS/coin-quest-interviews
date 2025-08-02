@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHome from "@/components/dashboard/DashboardHome";
-import DashboardSection from "@/components/DashboardSection";
+import UserCoins from "@/components/dashboard/UserCoins";
+import InterviewPanel from "@/components/dashboard/InterviewPanel";
+import JDResumeInterview from "@/components/dashboard/JDResumeInterview";
+import ResumeJDScore from "@/components/dashboard/ResumeJDScore";
+import UserPreviousResults from "@/components/dashboard/UserPreviousResults";
 
 const Dashboard = () => {
   const [coinBalance, setCoinBalance] = useState(200);
@@ -23,15 +27,15 @@ const Dashboard = () => {
       case 'home':
         return <DashboardHome />;
       case 'user-coins':
-        return <div className="text-white">User Coins Page - Coming Soon</div>;
+        return <UserCoins />;
       case 'interview-panel':
-        return <div className="text-white">Interview Panel Page - Coming Soon</div>;
+        return <InterviewPanel />;
       case 'jd-resume':
-        return <div className="text-white">JD/Resume Interview Page - Coming Soon</div>;
+        return <JDResumeInterview />;
       case 'resume-score':
-        return <div className="text-white">Resume and JD Score Page - Coming Soon</div>;
+        return <ResumeJDScore />;
       case 'previous-results':
-        return <div className="text-white">Previous Results Page - Coming Soon</div>;
+        return <UserPreviousResults />;
       default:
         return <DashboardHome />;
     }
