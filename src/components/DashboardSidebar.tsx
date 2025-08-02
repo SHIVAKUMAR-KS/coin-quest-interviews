@@ -80,7 +80,7 @@ const DashboardSidebar = ({ coinBalance, onLogout, currentPage, onPageChange }: 
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="text-xs sm:text-sm text-cyan-300">Welcome</div>
-                    <div className="font-semibold text-xs sm:text-sm truncate">afreenshaikzl6@gmail.com</div>
+                    <div className="font-semibold text-xs sm:text-sm truncate">kshiva09283@gmail.com</div>
                   </div>
                 </div>
               )}
