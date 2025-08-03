@@ -43,7 +43,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
               <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </div>
             <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hidden sm:inline">
-              CoinQuest Interviews
+              AI Interviews
             </span>
           </div>
 
