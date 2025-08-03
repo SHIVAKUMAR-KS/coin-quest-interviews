@@ -31,7 +31,7 @@ const Footer = () => {
               {socialIcons.map((icon, index) => (
                 <button 
                   key={index}
-                  className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors duration-200 text-xl"
+                  className="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors duration-200 text-xl hover:scale-110 transform"
                 >
                   {icon}
                 </button>
@@ -39,44 +39,48 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Footer Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category} className="lg:col-span-0">
-              <h3 className="text-lg font-semibold mb-6">{category}</h3>
-              <ul className="space-y-4">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a 
-                      href="#"
-                      className="text-gray-400 hover:text-white transition-colors duration-200"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+          {/* Footer Links - Desktop: 4 columns, Mobile: 2x2 grid */}
+          <div className="lg:col-span-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              {Object.entries(footerLinks).map(([category, links]) => (
+                <div key={category}>
+                  <h3 className="text-lg font-semibold mb-6">{category}</h3>
+                  <ul className="space-y-4">
+                    {links.map((link) => (
+                      <li key={link}>
+                        <a 
+                          href="#"
+                          className="text-gray-400 hover:text-white transition-colors duration-200 hover:underline"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Contact Information */}
         <div className="border-t border-gray-800 pt-8 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-200">
               <Phone className="w-5 h-5 text-blue-500" />
               <div>
                 <div className="text-sm text-gray-400">Call us</div>
                 <div className="font-semibold">+91 9392732341</div>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-200">
               <Mail className="w-5 h-5 text-green-500" />
               <div>
                 <div className="text-sm text-gray-400">Email us</div>
                 <div className="font-semibold">support@coinquest.com</div>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-200">
               <MapPin className="w-5 h-5 text-red-500" />
               <div>
                 <div className="text-sm text-gray-400">Visit us</div>
@@ -92,9 +96,9 @@ const Footer = () => {
             © 2025 CoinQuest Interviews. All rights reserved.
           </div>
           <div className="flex items-center space-x-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">Terms & Conditions</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">Cookie Policy</a>
+            <a href="#" className="hover:text-white transition-colors duration-200 hover:underline">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors duration-200 hover:underline">Terms & Conditions</a>
+            <a href="#" className="hover:text-white transition-colors duration-200 hover:underline">Cookie Policy</a>
           </div>
         </div>
       </div>

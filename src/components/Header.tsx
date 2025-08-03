@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -16,9 +15,8 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    navigate('/login');
     setMobileMenuOpen(false);
-    navigate('/dashboard');
   };
 
   const handleLogout = () => {
@@ -69,18 +67,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
             >
               Book a Demo
             </button>
-            <button 
-              onClick={() => handleNavigation('/watch-demo')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
-            >
-              Watch Demo
-            </button>
-            <button 
-              onClick={() => handleNavigation('/contact-support')}
-              className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
-            >
-              Contact Support
-            </button>
+            {!isLoggedIn && (
+              <button 
+                onClick={() => handleNavigation('/login')}
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
+              >
+                Login
+              </button>
+            )}
             {isLoggedIn && (
               <button 
                 onClick={() => handleNavigation('/dashboard')}
@@ -150,18 +144,14 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
               >
                 Book a Demo
               </button>
-              <button 
-                onClick={() => handleNavigation('/watch-demo')}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
-              >
-                Watch Demo
-              </button>
-              <button 
-                onClick={() => handleNavigation('/contact-support')}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
-              >
-                Contact Support
-              </button>
+              {!isLoggedIn && (
+                <button 
+                  onClick={() => handleNavigation('/login')}
+                  className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200 text-left text-sm sm:text-base"
+                >
+                  Login
+                </button>
+              )}
               {isLoggedIn && (
                 <>
                   <button 

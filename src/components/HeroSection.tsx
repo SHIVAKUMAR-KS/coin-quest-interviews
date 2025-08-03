@@ -1,80 +1,112 @@
-
 import { Button } from "@/components/ui/button";
-import { Play, Zap, Brain } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight, Users, Trophy, Brain, Sparkles } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 interface HeroSectionProps {
   setIsLoggedIn: (value: boolean) => void;
 }
 
 const HeroSection = ({ setIsLoggedIn }: HeroSectionProps) => {
+  const navigate = useNavigate();
+
+  const handleStartJourney = () => {
+    navigate('/login');
+  };
+
+  const handleWatchDemo = () => {
+    // Implement logic to navigate to demo page
+  };
+
+  const statistics = [
+    { icon: Users, number: '10K+', label: 'Interviews Conducted' },
+    { icon: Trophy, number: '95%', label: 'Success Rate' },
+    { icon: Sparkles, number: '24/7', label: 'AI Availability' }
+  ];
+
   return (
-    <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-4 -left-4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -top-4 -right-4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-4 left-1/2 w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '4s' }}></div>
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Additional floating animations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/30 rounded-full animate-pulse delay-200"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-indigo-400/40 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-purple-400/30 rounded-full animate-pulse delay-800"></div>
+        <div className="absolute bottom-1/4 left-1/2 w-2.5 h-2.5 bg-cyan-400/25 rounded-full animate-pulse delay-1200"></div>
+        <div className="absolute top-1/6 right-1/3 w-1 h-1 bg-pink-400/35 rounded-full animate-pulse delay-300"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 text-sm font-medium mb-8 animate-fade-in">
-            <Zap className="w-4 h-4 mr-2" />
-            Experience AI-Powered Mock Interviews
-          </div>
+      <div className="max-w-7xl mx-auto text-center relative z-10">
+        {/* Beta Badge */}
+        <div className="mb-8 animate-fade-in">
+          <Badge 
+            variant="secondary" 
+            className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-blue-200 px-4 py-2 text-sm font-medium hover:scale-105 transition-transform duration-200"
+          >
+            <Sparkles className="w-4 h-4 mr-2" />
+            AI-Powered Interview Platform - Now in Beta
+          </Badge>
+        </div>
 
-          {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Master Every Interview
-            </span>
-            <br />
-            <span className="text-gray-800">
-              with AI Precision
-            </span>
-          </h1>
+        {/* Main Heading */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in delay-100">
+          <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Master Your
+          </span>
+          <br />
+          <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Interview Skills
+          </span>
+        </h1>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            Ace every interview with confidence. Automated interviews that evaluate your skills instantly, 
-            along with real-time feedback and growth tracking.
-          </p>
+        {/* Subtitle */}
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in delay-200">
+          Practice with AI-powered mock interviews, get personalized feedback, 
+          and land your dream job with confidence. Transform your career journey today.
+        </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <Button 
-              size="lg" 
-              onClick={() => setIsLoggedIn(true)}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-6 text-lg font-semibold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              Start Your Journey
-            </Button>
-            
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="px-8 py-6 text-lg font-semibold rounded-full border-2 border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-all duration-300"
-            >
-              Watch Demo
-            </Button>
-          </div>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in delay-300">
+          <Button 
+            size="lg"
+            onClick={handleStartJourney}
+            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            Start Your Journey
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={handleWatchDemo}
+            className="border-2 border-gray-300 hover:border-blue-500 px-8 py-4 text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 hover:bg-blue-50"
+          >
+            Watch Demo
+          </Button>
+        </div>
 
-          {/* Stats */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">10K+</div>
-              <div className="text-gray-600">Interviews Conducted</div>
+        {/* Statistics */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in delay-400">
+          {statistics.map((stat, index) => (
+            <div key={index} className="text-center group hover:scale-105 transition-transform duration-200">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg mb-4 group-hover:shadow-lg transition-shadow duration-200">
+                <stat.icon className="w-6 h-6 text-white" />
+              </div>
+              <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+              <div className="text-gray-600 font-medium">{stat.label}</div>
             </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-indigo-600 mb-2">95%</div>
-              <div className="text-gray-600">Success Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
-              <div className="text-gray-600">AI Availability</div>
-            </div>
+          ))}
+        </div>
+
+        {/* Trust Indicators */}
+        <div className="mt-16 animate-fade-in delay-500">
+          <p className="text-gray-500 mb-6 font-medium">Trusted by professionals from</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            {/* Company logos would go here */}
+            <div className="text-2xl font-bold text-gray-400">Google</div>
+            <div className="text-2xl font-bold text-gray-400">Microsoft</div>
+            <div className="text-2xl font-bold text-gray-400">Amazon</div>
+            <div className="text-2xl font-bold text-gray-400">Meta</div>
+            <div className="text-2xl font-bold text-gray-400">Netflix</div>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import BookDemo from "./pages/BookDemo";
 import WatchDemo from "./pages/WatchDemo";
 import ContactSupport from "./pages/ContactSupport";
 import Dashboard from "./pages/Dashboard";
+import LoginRegister from "./pages/LoginRegister";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/watch-demo" element={<WatchDemo />} />
           <Route path="/contact-support" element={<ContactSupport />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<LoginRegister />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
