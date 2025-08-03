@@ -46,8 +46,8 @@ const HeroSection = ({ setIsLoggedIn }: HeroSectionProps) => {
               className="bg-gradient-to-r from-purple-100/20 to-blue-100/20 text-white border-purple-300/30 px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium hover:scale-105 transition-transform duration-200 backdrop-blur-sm"
             >
               <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-              <span className="hidden sm:inline">AI-Powered Interview Platform - Now in Beta</span>
-              <span className="sm:hidden">AI Interview Platform - Beta</span>
+              <span className="hidden sm:inline mt-6">AI-Powered Interview Platform - Now in Beta</span>
+              <span className="sm:inline mt-6">AI Interview Platform - Beta</span>
             </Badge>
           </div>
 
