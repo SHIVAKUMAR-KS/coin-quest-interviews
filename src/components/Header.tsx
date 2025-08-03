@@ -42,7 +42,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
               <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
             </div>
-            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent hidden sm:inline">
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent  sm:inline">
               AI Interviews
             </span>
           </div>
@@ -67,7 +67,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
             >
               Book a Demo
             </button>
-            {!isLoggedIn && (
+            {/* {!isLoggedIn && (
               <button 
                 onClick={() => handleNavigation('/login')}
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 text-sm xl:text-base"
@@ -82,7 +82,7 @@ const Header = ({ isLoggedIn, setIsLoggedIn }: HeaderProps) => {
               >
                 Dashboard
               </button>
-            )}
+            )} */}
           </nav>
 
           {/* User Actions */}
