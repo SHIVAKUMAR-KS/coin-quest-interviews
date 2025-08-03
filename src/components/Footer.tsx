@@ -41,7 +41,7 @@ const Footer = () => {
 
           {/* Footer Links */}
           {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category} className="lg:col-span-1">
+            <div key={category} className="lg:col-span-0">
               <h3 className="text-lg font-semibold mb-6">{category}</h3>
               <ul className="space-y-4">
                 {links.map((link) => (
@@ -80,7 +80,7 @@ const Footer = () => {
               <MapPin className="w-5 h-5 text-red-500" />
               <div>
                 <div className="text-sm text-gray-400">Visit us</div>
-                <div className="font-semibold">San Francisco, CA</div>
+                <div className="font-semibold">Hyderabad</div>
               </div>
             </div>
           </div>
@@ -89,7 +89,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
-            © 2024 CoinQuest Interviews. All rights reserved.
+            © 2025 CoinQuest Interviews. All rights reserved.
           </div>
           <div className="flex items-center space-x-6 text-sm text-gray-400">
             <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
