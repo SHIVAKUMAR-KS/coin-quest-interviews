@@ -27,7 +27,7 @@ const HeroSection = ({ setIsLoggedIn }: HeroSectionProps) => {
   ];
 
   return (
-    <BackgroundBeamsWithCollision className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <BackgroundBeamsWithCollision className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
       <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Additional floating animations */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -39,35 +39,36 @@ const HeroSection = ({ setIsLoggedIn }: HeroSectionProps) => {
         </div>
 
         <div className="max-w-7xl mx-auto text-center relative z-10">
-          {/* Beta Badge */}
-          <div className="mb-8 animate-fade-in">
+          {/* Beta Badge - Made fully responsive */}
+          <div className="mb-6 sm:mb-8 animate-fade-in">
             <Badge 
               variant="secondary" 
-              className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-blue-200 px-4 py-2 text-sm font-medium hover:scale-105 transition-transform duration-200"
+              className="bg-gradient-to-r from-purple-100/20 to-blue-100/20 text-white border-purple-300/30 px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium hover:scale-105 transition-transform duration-200 backdrop-blur-sm"
             >
-              <Sparkles className="w-4 h-4 mr-2" />
-              AI-Powered Interview Platform - Now in Beta
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <span className="hidden sm:inline">AI-Powered Interview Platform - Now in Beta</span>
+              <span className="sm:hidden">AI Interview Platform - Beta</span>
             </Badge>
           </div>
 
           {/* Main Heading with Beams Effect */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-in delay-100">
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 animate-fade-in delay-100">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Master Your
             </span>
             <br />
             <div className="relative mx-auto inline-block w-max [filter:drop-shadow(0px_1px_3px_rgba(27,_37,_80,_0.14))]">
-              <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-4 from-purple-500 via-violet-500 to-pink-500 [text-shadow:0_0_rgba(0,0,0,0.1)]">
+              <div className="absolute left-0 top-[1px] bg-clip-text bg-no-repeat text-transparent bg-gradient-to-r py-2 sm:py-4 from-purple-400 via-violet-400 to-pink-400 [text-shadow:0_0_rgba(0,0,0,0.1)]">
                 <span className="">Interview Skills</span>
               </div>
-              <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-500 via-violet-500 to-pink-500 py-4">
+              <div className="relative bg-clip-text text-transparent bg-no-repeat bg-gradient-to-r from-purple-400 via-violet-400 to-pink-400 py-2 sm:py-4">
                 <span className="">Interview Skills</span>
               </div>
             </div>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in delay-200">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in delay-200">
             Practice with AI-powered mock interviews, get personalized feedback, 
             and land your dream job with confidence. Transform your career journey today.
           </p>
@@ -77,44 +78,44 @@ const HeroSection = ({ setIsLoggedIn }: HeroSectionProps) => {
             <Button 
               size="lg"
               onClick={handleStartJourney}
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Start Your Journey
-              <ArrowRight className="ml-2 w-5 h-5" />
+              <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Button 
               variant="outline" 
               size="lg"
               onClick={handleWatchDemo}
-              className="border-2 border-gray-300 hover:border-blue-500 px-8 py-4 text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 hover:bg-blue-50"
+              className="border-2 border-gray-400/30 hover:border-purple-500/50 text-white hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl transform hover:scale-105 transition-all duration-300 hover:bg-purple-500/20 backdrop-blur-sm"
             >
               Watch Demo
             </Button>
           </div>
 
           {/* Statistics */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in delay-400">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto animate-fade-in delay-400">
             {statistics.map((stat, index) => (
               <div key={index} className="text-center group hover:scale-105 transition-transform duration-200">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg mb-4 group-hover:shadow-lg transition-shadow duration-200">
-                  <stat.icon className="w-6 h-6 text-white" />
+                <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg mb-4 group-hover:shadow-lg transition-shadow duration-200">
+                  <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-gray-300 font-medium text-sm sm:text-base">{stat.label}</div>
               </div>
             ))}
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 animate-fade-in delay-500">
-            <p className="text-gray-500 mb-6 font-medium">Trusted by professionals from</p>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+          <div className="mt-12 sm:mt-16 animate-fade-in delay-500">
+            <p className="text-gray-400 mb-4 sm:mb-6 font-medium text-sm sm:text-base">Trusted by professionals from</p>
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 opacity-60">
               {/* Company logos would go here */}
-              <div className="text-2xl font-bold text-gray-400">Google</div>
-              <div className="text-2xl font-bold text-gray-400">Microsoft</div>
-              <div className="text-2xl font-bold text-gray-400">Amazon</div>
-              <div className="text-2xl font-bold text-gray-400">Meta</div>
-              <div className="text-2xl font-bold text-gray-400">Netflix</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400">Google</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400">Microsoft</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400">Amazon</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400">Meta</div>
+              <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-400">Netflix</div>
             </div>
           </div>
         </div>
